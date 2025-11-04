@@ -1,0 +1,172 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="1280" Height="720"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:vm="clr-namespace:Menus.ViewModels"
+             xmlns:p1="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+             xmlns:SystemDecorations="clr-namespace:System;assembly=System.Runtime"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             x:Class="Menus.Views.EventView"
+             x:DataType="vm:EventViewModel">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:EventViewModel />
+    </Design.DataContext>
+    
+    <Grid>
+        <TabControl Name="TabControl" SelectedIndex="{Binding PageIndex}">
+            <TabControl.ContentTemplate>
+                <DataTemplate x:DataType="SystemDecorations:Object">
+                    <TransitioningContentControl Content="{Binding}"
+                                                 IsTransitionReversed="{Binding ElementName=TabControl, Path=DataContext.IsReverse}">
+                        <TransitioningContentControl.PageTransition>
+                            <!--<CrossFade Duration="0:0:0.5"/>-->
+                            <PageSlide Duration="0:0:0.5"/>
+                            <!--<Rotate3DTransition Duration="0:0:0.5" Orientation="Horizontal"/>-->
+                        </TransitioningContentControl.PageTransition>
+                    </TransitioningContentControl>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+            
+            <TabControl.Items>
+                <TabItem Header="INICIO">
+                    <StackPanel Background="Coral">
+                        <TextBlock Classes="Centered" Text="Page 1" />
+                        <Grid>
+                            <StackPanel DataContext="{Binding ElementName=TabControl, Path=DataContext}">
+                                <!--<TextBlock Text="HOLA" HorizontalAlignment="Center"/>-->
+                                <!--<Button Width="200" Margin="10" Content="IR A INICIO" Classes="MiBoton2" Command="{Binding NavegateToCommand}" CommandParameter="inicio"/>-->
+                                <!--<Button Width="200" Margin="10" Content="IR A TIENDA" Classes="MiBoton" Command="{Binding NavegateToCommand}" CommandParameter="tienda"/>-->
+                                <!--<HyperlinkButton Classes="MiBotonImagen"/>-->
+                                <!--<Button Classes="BotonAnimado BotonDeformado BotonRotado" Width="200" Content="pepe"/>-->
+                                <!--LISTA DE LEGUAJES-->
+                                <ListBox ItemsSource="{Binding LanguageList}" 
+                                         Name="ListaLenguajes"
+                                         SelectionMode="Multiple, Toggle"
+                                         SelectedItems="{Binding ElementName=TabControl, Path=DataContext.RegisterModel}"
+                                         Height="350" Width="500"
+                                         HorizontalAlignment="Center">
+                                    <Interaction.Behaviors>
+                                        <EventTriggerBehavior EventName="SelectionChanged">
+                                            <InvokeCommandAction
+                                                Command="{Binding SelectedLanguagesChangedCommand}"
+                                                CommandParameter="{Binding ElementName=ListaLenguajes, Path=SelectedItem}"/>
+                                        </EventTriggerBehavior>
+                                    </Interaction.Behaviors>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    
+                                    <ListBox.Styles>
+                                        <!--<Style Selector="ListBoxItem:selected">
+                                            <Setter Property="Background" Value="Aqua"/>
+                                        </Style>-->
+                                        <Style Selector="ListBoxItem:selected controls|Card">
+                                            <Setter Property="Background" Value="Aqua"/>
+                                            <Setter Property="BorderBrush" Value="DarkCyan"/>
+                                            <Setter Property="BorderThickness" Value="2"/>
+                                        </Style>
+                                    </ListBox.Styles>
+                                    
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <controls:Card Classes="MiTarjeta" Height="150" Width="150" VerticalAlignment="Top">
+                                                <StackPanel Margin="0, 4">
+                                                    <StackPanel Margin="16">
+                                                        <Image Width="70" Height="70" Margin="10" Source="{Binding ImagenPath}"/>
+                                                        <TextBlock Text="{Binding Nombre}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </controls:Card>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ListBox>
+                                <TextBlock Text="{Binding Mensaje}"
+                                           HorizontalAlignment="Center" FontSize="20"
+                                           Foreground="Azure"/>
+                                <Button Width="200" Margin="10"
+                                        IsEnabled="{Binding IsLanguageSelected}"
+                                        Content="IR A USUARIOS" 
+                                        Command="{Binding ElementName=TabControl, Path=DataContext.CambiarTabCommand}"
+                                        CommandParameter="1"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="IDS">
+                    <StackPanel Background="LightBlue">
+                        <Grid>
+                            <StackPanel DataContext="{Binding ElementName=TabControl, Path=DataContext}">
+                                <TextBlock Classes="Centered" Text="Page 2"/>
+                                <!--LISTA DE ENTORNOS-->
+                                <ListBox ItemsSource="{Binding IdsList}" 
+                                         SelectionMode="Multiple, Toggle"
+                                         SelectedItems="{Binding ElementName=TabControl, Path=DataContext}"
+                                         Height="350" Width="500"
+                                         HorizontalAlignment="Center">
+                                    <Interaction.Behaviors>
+                                        <EventTriggerBehavior EventName="SelectionChanged">
+                                            <InvokeCommandAction
+                                                Command="{Binding SelectedEntornoChangedCommand}"
+                                                CommandParameter="{Binding ElementName=ListaLenguajes, Path=SelectedItem}"/>
+                                        </EventTriggerBehavior>
+                                    </Interaction.Behaviors>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    
+                                    <ListBox.Styles>
+                                        <!--<Style Selector="ListBoxItem:selected">
+                                            <Setter Property="Background" Value="Aqua"/>
+                                        </Style>-->
+                                        <Style Selector="ListBoxItem:selected controls|Card">
+                                            <Setter Property="Background" Value="Aqua"/>
+                                            <Setter Property="BorderBrush" Value="DarkCyan"/>
+                                            <Setter Property="BorderThickness" Value="2"/>
+                                        </Style>
+                                    </ListBox.Styles>
+                                    
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <controls:Card Height="150" Width="150" VerticalAlignment="Top">
+                                                <StackPanel Margin="0, 4">
+                                                    <StackPanel Margin="16">
+                                                        <Image Width="70" Height="70" Margin="10" Source="{Binding ImagenPath}"/>
+                                                        <TextBlock Text="{Binding Nombre}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </controls:Card>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ListBox>
+                                <Button Width="200" Margin="10" IsEnabled="{Binding IsEntornoSelected}" Content="SIGUIENTE" Command="{Binding ElementName=TabControl, Path=DataContext.CambiarTabCommand}" CommandParameter="1"/>
+                                <Button Width="200" Margin="10" Content="VOLVER" Command="{Binding ElementName=TabControl, Path=DataContext.CambiarTabCommand}" CommandParameter="-1"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="REGISTRO">
+                    <StackPanel Background="LimeGreen" DataContext="{Binding ElementName=TabControl, Path=DataContext}">
+                        <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
+                                  p1:ComboBoxAssist.Label="Provincias"
+                                  SelectedItem="{Binding SelectedProvincia}"
+                                  ItemsSource="{Binding Provincias}"
+                                  Width="300"/>
+                        
+                        <ComboBox Theme="{StaticResource MaterialOutlineComboBox}" 
+                                  p1:ComboBoxAssist.Label="Municipios"
+                                  ItemsSource="{Binding Municipios}"
+                                  Width="300"/>
+                    </StackPanel>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
+    </Grid>
+</UserControl>

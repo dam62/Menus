@@ -1,0 +1,66 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--#####################-->
+    <!--Estilo boton 1-->
+    <!--#####################-->
+    <Style Selector="Button.MiBoton">
+        <Setter Property="Background" Value="Gold"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Width" Value="160"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="BorderBrush" Value="Navy"/>
+    </Style>
+    
+    <Style Selector="Button.MiBoton:pointerover">
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="Foreground" Value="Beige"/>
+    </Style>
+    
+    <Style Selector="Button.MiBoton:pressed">
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    
+    <!--#####################-->
+    <!--Estilo boton 2-->
+    <!--#####################-->
+    <Style Selector="Button.MiBoton2">
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="RenderTransform">
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button.MiBoton2:pointerover">
+        <Setter Property="RenderTransform">
+            <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+        </Setter>
+    </Style>
+    
+    <!--#####################-->
+    <!--Estilo boton 3 con imagen-->
+    <!--#####################-->
+    <Style Selector="HyperlinkButton.MiBotonImagen">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush Stretch="Fill" Source="avares://Menus/Assets/logo.jpg"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RenderTransform">
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+        </Setter>
+    </Style>
+    
+    <Style Selector="HyperlinkButton.MiBotonImagen:pointerover">
+        <Setter Property="RenderTransform">
+            <TransformGroup>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                <RotateTransform Angle="5"/>
+            </TransformGroup>
+        </Setter>
+    </Style>
+</Styles>

@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Menus.ViewModels"
+             xmlns:fa="using:FluentAvalonia.UI.Controls"
+             xmlns:WindowStartupLocation="CenterScreen"
+             Width="1280" Height="720"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             x:Class="Menus.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+    
+  </Design.DataContext>
+    <fa:NavigationView PaneDisplayMode="Left"
+                       SelectedItem="{Binding NavigationService.SelectedMenuItem}"
+                       MenuItemsSource="{Binding NavigationService.MenuItems}">
+        <!--<fa:NavigationView.MenuItems>
+            <fa:NavigationViewItem Content="Inicio" IconSource="Home"/>
+            <fa:NavigationViewItem Content="Productos" IconSource="Shop"/>
+        </fa:NavigationView.MenuItems>-->
+        <ContentControl Content="{Binding NavigationService.CurrentView}"/>
+    </fa:NavigationView>
+</UserControl>

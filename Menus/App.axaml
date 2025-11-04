@@ -1,0 +1,25 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:Menus"
+             xmlns:styling1="clr-namespace:FluentAvalonia.Styling;assembly=FluentAvalonia"
+             xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="Menus.App"
+             RequestedThemeVariant="Dark">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <StyleInclude Source="avares://Menus/Styles/ButtonStyles.axaml"/>
+        <StyleInclude Source="avares://Menus/Styles/Styles.axaml"/>
+        <StyleInclude Source="avares://Menus/Styles/ComponentStyles.axaml"/>
+        <avalonia:MaterialIconStyles/>
+        <styling1:FluentAvaloniaTheme/>
+        <themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Purple" SecondaryColor="Lime"/>
+        <dialogHostAvalonia:DialogHostStyles/>
+    </Application.Styles>
+</Application>
